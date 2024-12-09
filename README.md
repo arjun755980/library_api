@@ -55,7 +55,55 @@ A RESTful API for managing a library system built with **Django** and **Django R
 | POST   | `/api/auth/refresh/`| Refresh an expired access token       |
 
 #### Example Request for Login:
-```bash
-curl -X POST http://127.0.0.1:8000/api/auth/login/ \
--H "Content-Type: application/json" \
--d '{"username": "testuser", "password": "password123"}'
+   
+     curl -X POST http://127.0.0.1:8000/api/auth/login/ \
+     -H "Content-Type: application/json" \
+     -d '{"username": "testuser", "password": "password123"}'
+
+## Books
+
+### Endpoints
+
+| Method | Endpoint          | Description                              |
+|--------|-------------------|------------------------------------------|
+| GET    | `/api/books/`      | List all books (authenticated users only) |
+| POST   | `/api/books/`      | Add a new book (authenticated users only) |
+| GET    | `/api/books/<id>/` | Retrieve a specific book (authenticated users only) |
+| PUT    | `/api/books/<id>/` | Update a book (authenticated users only) |
+| DELETE | `/api/books/<id>/` | Delete a book (authenticated users only) |
+
+---
+
+### Example Requests
+
+#### 1. **List Books**
+
+    curl -X GET http://127.0.0.1:8000/api/books/ \
+    -H "Authorization: Bearer <your_access_token>"
+#### Example Request for Adding a Book:
+
+     curl -X POST http://127.0.0.1:8000/api/books/ \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <your_access_token>" \
+    -d '{
+        "title": "Django for Beginners",
+        "author": "William S. Vincent",
+        "published_year": 2024,
+        "genre": "Technology",
+        "available_copies": 5
+    }'
+#### Example Response:
+    {
+        "id": 1,
+        "title": "Django for Beginners",
+        "author": "William S. Vincent",
+        "published_year": 2024,
+        "genre": "Technology",
+          "available_copies": 5
+    }
+### Features
+- Secure authentication using JSON Web Tokens (JWT).
+- RESTful APIs for managing a library's books.
+- CRUD operations on the Book model.
+- Accessible only to authenticated users.
+
