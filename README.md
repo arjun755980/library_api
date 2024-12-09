@@ -46,3 +46,16 @@ A RESTful API for managing a library system built with **Django** and **Django R
 6. **Run the server**:
    ```bash
    python manage.py runserver
+## Endpoints
+
+### Authentication
+| Method | Endpoint           | Description                           |
+|--------|---------------------|---------------------------------------|
+| POST   | `/api/auth/login/`  | Obtain access and refresh tokens      |
+| POST   | `/api/auth/refresh/`| Refresh an expired access token       |
+
+#### Example Request for Login:
+```bash
+curl -X POST http://127.0.0.1:8000/api/auth/login/ \
+-H "Content-Type: application/json" \
+-d '{"username": "testuser", "password": "password123"}'
